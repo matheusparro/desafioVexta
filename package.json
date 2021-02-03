@@ -1,7 +1,7 @@
 {
   "name": "desafio-vexta",
   "version": "1.0.0",
-  "web":"index.js",
+  "web": "index.js",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -10,10 +10,11 @@
     "sequelize": "^6.5.0"
   },
   "scripts": {
-    "start": " yarn src/server.js"
+    "start": "nodemon src/server.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.7",
     "sequelize-cli": "^6.2.0"
   }
 }
+
