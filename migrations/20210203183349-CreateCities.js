@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('cities', {
       id: {
         type: Sequelize.INTEGER,
         primarayKey:true,
@@ -10,22 +10,13 @@ module.exports = {
         allownull: false,
         unique:true,
       },
-      login:{
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique:true,
-      },
       name:{
         type: Sequelize.STRING,
         allowNull: false,
       },
-      password_hash:{
+      uf:{
         type: Sequelize.STRING,
-        allowNull:false,
-      },
-      is_admin:{
-        type: Sequelize.BOOLEAN,
-        allowNull:true,
+        allowNull: false,
       },
       created_at:{
         type: Sequelize.DATE,
@@ -39,6 +30,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('cities');
   }
 };
