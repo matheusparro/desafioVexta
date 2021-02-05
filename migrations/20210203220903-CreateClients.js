@@ -44,7 +44,6 @@ module.exports = {
         type: Sequelize.NUMERIC,
         allowNull: false,
       },
-     
       zone:{
         type: Sequelize.STRING,
         allowNull: false,
