@@ -42,16 +42,8 @@
 // }
 module.exports = {
   "development": {
-    "username": "hfailttvrveoxr",
-    "password": "67c4fb55cb1cbd2707542ab965c6a272cee3d5c3dd2771a62495c47d547be845",
-    "database": "dbcen3s14hknqs",
-    "port":"5432",
-    "host": "ec2-52-205-3-3.compute-1.amazonaws.com",
+    "url": process.env.DEV_DATABASE_URL,
     "dialect": "postgres",
-    "protocol": "postgres",
-    "dialectOptions": {
-        "ssl": "true"
-    },
     "define":  {
       "timestamp": "true",
       "underscored":"true",
@@ -60,16 +52,8 @@ module.exports = {
   },
   
   "test": {
-    "username": "hfailttvrveoxr",
-    "password": "67c4fb55cb1cbd2707542ab965c6a272cee3d5c3dd2771a62495c47d547be845",
-    "database": "dbcen3s14hknqs",
-    "port":"5432",
-    "host": "ec2-52-205-3-3.compute-1.amazonaws.com",
+    "url": process.env.DEV_DATABASE_URL,
     "dialect": "postgres",
-    "protocol": "postgres",
-    "dialectOptions": {
-        "ssl": "true"
-    },
     "define":  {
       "timestamp": "true",
       "underscored":"true",
@@ -77,22 +61,14 @@ module.exports = {
     }
   },
   "production": {
-    "username": "hfailttvrveoxr",
-    "password": "67c4fb55cb1cbd2707542ab965c6a272cee3d5c3dd2771a62495c47d547be845",
-    "database": "dbcen3s14hknqs",
-    "port":"5432",
-    "host": "ec2-52-205-3-3.compute-1.amazonaws.com",
+    "url": process.env.DEV_DATABASE_URL,
     "dialect": "postgres",
-    "protocol": "postgres",
-    "dialectOptions": {
-        "ssl": "true"
-    },
     "define":  {
       "timestamp": "true",
       "underscored":"true",
       "freezeTableName": "true"
     }
-  }
+  },
 }
 
 
