@@ -1,6 +1,6 @@
 // CONEXAO COM BANCO
 const sequelize = require ('sequelize');
-const dbConfig = require ('../Config/dataBase')
+const dbConfig = require ('../../config/config')
 
 const User = require('../models/User');
 const City = require('../models/City');
