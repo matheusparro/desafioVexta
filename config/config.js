@@ -5,6 +5,7 @@ module.exports = {
     "username":'hfailttvrveoxr',
     "password":'67c4fb55cb1cbd2707542ab965c6a272cee3d5c3dd2771a62495c47d547be845',
     "database":'dbcen3s14hknqs',
+    "protocol":"postgres",
     "define":  {
       "timestamp": true,
       "underscored":true,
@@ -18,6 +19,7 @@ module.exports = {
     "username":'hfailttvrveoxr',
     "password":'67c4fb55cb1cbd2707542ab965c6a272cee3d5c3dd2771a62495c47d547be845',
     "database":'dbcen3s14hknqs',
+    "protocol":"postgres",
     "define":  {
       "timestamp": true,
       "underscored":true,
@@ -30,6 +32,7 @@ module.exports = {
     "username":'hfailttvrveoxr',
     "password":'67c4fb55cb1cbd2707542ab965c6a272cee3d5c3dd2771a62495c47d547be845',
     "database":'dbcen3s14hknqs',
+    "protocol":"postgres",
     "define":  {
       "timestamp": true,
       "underscored":true,
