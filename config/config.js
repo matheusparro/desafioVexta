@@ -42,7 +42,7 @@
 // }
 module.exports = {
   "development": {
-    "url": process.env.DEV_DATABASE_URL,
+    "url": "process.env.DEV_DATABASE_URL",
     "dialect": "postgres",
     "define":  {
       "timestamp": "true",
@@ -52,7 +52,7 @@ module.exports = {
   },
   
   "test": {
-    "url": process.env.DEV_DATABASE_URL,
+    "url": "process.env.DEV_DATABASE_URL",
     "dialect": "postgres",
     "define":  {
       "timestamp": "true",
@@ -61,7 +61,7 @@ module.exports = {
     }
   },
   "production": {
-    "url": process.env.DEV_DATABASE_URL,
+    "url": "process.env.DEV_DATABASE_URL",
     "dialect": "postgres",
     "define":  {
       "timestamp": "true",
