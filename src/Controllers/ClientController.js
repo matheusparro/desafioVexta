@@ -2,7 +2,7 @@ const Client = require("../models/Client");
 const cpfCnpjValidator = require("cpf-cnpj-validator")
 const axios = require("axios")
 const parse = require("telefone/parse")
-const Op = require("Sequelize/lib/operators")
+const {Op} = require("sequelize")
 const  emailValidator  = require ( "email-validator" ) 
 const City = require("../models/City"); 
 const User = require("../models/User");
@@ -120,8 +120,8 @@ async function createClient(req,res){
             
             name:{[Op.iLike]: `%${name}%`},
             cpf_cnpj:{[Op.iLike]: `%${cpf_cnpj}%`},
-            cpf_cnpj:{[Op.iLike]: `%${phone}%`},
-            cpf_cnpj:{[Op.iLike]: `%${city_id}%`},
+            phone:{[Op.iLike]: `%${phone}%`},
+            city_id:{[Op.in]: [city_id]},
             }
         }})
 

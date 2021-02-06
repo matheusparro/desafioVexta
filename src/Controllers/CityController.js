@@ -1,5 +1,5 @@
 const City = require("../models/City");
-const Op = require("sequelize/lib/operators")
+const {Op} = require("sequelize")
 
 async function createCity(req,res){
         const{name,uf} = req.body;
@@ -10,14 +10,14 @@ async function createCity(req,res){
     async function findAllCities(req,res){
         const {name,uf} = req.query
          
-        const citiesQuery = await City.findAll({
-            where: { 
-                [Op.and]:[
-                {name:{[Op.iLike]:`%${name}%`}},
-                {uf:{[Op.iLike]:`%${uf}%`}},
-                ]
+        const citiesQuery = await City.findAll({where: { 
+                [Op.and]:{
+                name:{[Op.iLike]:`%${name}%`},
+                uf:{[Op.iLike]:`%${uf}%`},
+                }
             }
         })
+
         return res.json(citiesQuery)
     }
 
