@@ -21,6 +21,7 @@ routes.delete('/users/:id',UserController.deleteUser)
 
 routes.post('/cities',CityController.createCity)
 routes.get('/cities',CityController.findAllCities)
+routes.get('/cities/:id',CityController.findCity)
 
 
 

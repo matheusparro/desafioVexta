@@ -86,20 +86,23 @@ async function createClient(req,res){
 
   
     async function findAllClients(req,res){
-        const {cpf_cnpj,name,phone,city_id,uf} = req.query
+        const {cpf_cnpj,name,phone,city_id} = req.query
         
         const clientsQuery = await Client.findAll({
             where: { 
                 [Op.and]:[
                 {cpf_cnpj:{[Op.iLike]:"%"+cpf_cnpj}},
                 {name:{[Op.iLike]:"%"+name+"%"}},
-                {phone:{[Op.eq]:"%"+phone}},
+                {phone:{[Op.eq]:phone}},
                 {city_id:{[Op.eq]:city_id}}   
                 ]
         }
         })
         if (clientsQuery.length===0){
             let clients = await Client.findAll()
+            if (!clients){
+                return res.status(401).json({error:"Clients not found"})
+            }
             return res.json(clients)
         }
         
