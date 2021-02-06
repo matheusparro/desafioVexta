@@ -3,6 +3,7 @@ module.exports = {
     "username": "postgres",
     "password": "docker",
     "database": "desafioVexta",
+    "port":"5432",
     "host": "localhost",
     "dialect": "postgres",
     "define":  {
@@ -16,6 +17,7 @@ module.exports = {
     "password": "docker",
     "database": "desafioVexta",
     "host": "localhost",
+    "port":"5432",
     "dialect": "postgres",
     "define":  {
       "timestamp": true,
@@ -29,6 +31,7 @@ module.exports = {
     "password": "docker",
     "database": "desafioVexta",
     "host": "localhost",
+    "port":"5432",
     "dialect": "postgres",
     "define":  {
       "timestamp": true,
