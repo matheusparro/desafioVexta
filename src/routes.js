@@ -22,10 +22,10 @@ routes.delete('/users/:id',UserController.deleteUser)
 routes.post('/cities',CityController.createCity)
 routes.get('/cities',CityController.findAllCities)
 routes.get('/cities/:id',CityController.findCity)
+routes.patch('/cities/:id',CityController.updateCity)
+routes.delete('/cities/:id',CityController.deleteCity)
 
 
-
- 
 routes.post('/clients',ClientController.createClient)
 routes.get('/clients',ClientController.findAllClients)
 routes.get('/clients/:id',ClientController.findClient)

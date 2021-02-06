@@ -1,4 +1,5 @@
 const City = require("../models/City");
+const Op = require("sequelize/lib/operators")
 
 async function createCity(req,res){
         const{name,uf} = req.body;
@@ -12,20 +13,12 @@ async function createCity(req,res){
         const citiesQuery = await City.findAll({
             where: { 
                 [Op.and]:[
-                {name:{[Op.iLike]:"%"+name}},
-                {uf:{[Op.eq]:uf}},
+                {name:{[Op.iLike]:`%${name}%`}},
+                {uf:{[Op.iLike]:`%${uf}%`}},
                 ]
             }
         })
-        if (citiesQuery.length===0){
-            const cities = await City.findAll()
-            if (!cities){
-                return res.status(401).json({error:"Cities not found"})
-            }
-            return res.json(clients)
-        }
-
-        return res.json(await City.findAll())
+        return res.json(citiesQuery)
     }
 
     async function findCity(req,res){
@@ -45,7 +38,7 @@ async function createCity(req,res){
         const {id} = req.params
         const city = await City.findByPk(id)
         if (!client){
-            return res.status(400).json({error:"City does not exist"})
+            return res.status(404).json({error:"City does not exist"})
         }
         await city.update(req.body)
         
@@ -56,9 +49,14 @@ async function createCity(req,res){
         const {id} = req.params
         const city = await City.findByPk(id)
         if (!client){
-            return res.status(400).json({error:"City does not exist"})
+            return res.status(404).json({error:"City does not exist"})
         }
-        await city.destroy()
+        try {
+            await city.destroy()
+        } catch (error) {
+            return res.status(412).json({error:"City is used by a client"})
+        }
+     
         
         return res.json(city)
      } 
@@ -69,5 +67,6 @@ module.exports = {
     createCity,
     findAllCities,
     findCity,
-    updateCity
+    updateCity,
+    deleteCity
 }

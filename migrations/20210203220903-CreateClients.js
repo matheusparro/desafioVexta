@@ -38,15 +38,15 @@ module.exports = {
       },
       address:{
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       number:{
         type: Sequelize.NUMERIC,
-        allowNull: false,
+        allowNull: true,
       },
       zone:{
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       cell_phone:{
         type: Sequelize.STRING,

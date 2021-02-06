@@ -1,6 +1,5 @@
 const User = require("../models/User");
-const bcrypt = require('bcryptjs')
-const Op = require("Sequelize/lib/operators")
+const Op = require("sequelize/lib/operators")
 async function createUser(req,res){
     const {login} = req.body
     const userFind = await User.findOne({
@@ -20,17 +19,10 @@ async function findAllUsers(req,res){
     
     const usersQuery = await User.findAll({
         where: { name:{
-            [Op.iLike]:"%"+name+"%"
+            [Op.iLike]:`${name}`
         }}
     })
-    if (usersQuery.length===0){
-        let user = await User.findAll()
-        if (!user){
-            return res.status(401).json({error:"There are no registered users"})
-        }
-        return res.json(user)
-    }
-    
+   
    return res.json(usersQuery)
 }
 

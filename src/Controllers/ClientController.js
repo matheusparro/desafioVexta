@@ -6,18 +6,19 @@ const Op = require("Sequelize/lib/operators")
 const  emailValidator  = require ( "email-validator" ) 
 const City = require("../models/City"); 
 const User = require("../models/User");
+const validUrl = require('valid-url');
 
 /************VALIDAR EMAIL https://stackoverflow.com/questions/30931079/validating-a-url-in-node-js/55585593 *******/
 async function validateTelephoneCell(numero){
     let formatedPhone = parse(numero)
     if (!formatedPhone){
-        return "Telefone inválido"
+        return null
     }
     return formatedPhone
 }
 
 async function createClient(req,res){
-   
+   let error = []
     const{cpf_cnpj,
     name,trade_name,
     address,number,
@@ -25,14 +26,30 @@ async function createClient(req,res){
     }= req.body;
     const city =  await City.findByPk(city_id)
     if (!city){
-        res.status(404).json({error:"Cidade não foi encontrada"})
+        // res.status(404).json({error:"City not found"})
+        error.push ({error:"City not found"})
     }
+    if(number && isNaN(number)){
+        // res.status(404).json({error:"Number address must be of the numeric type"})
+          error.push ({error:"Number address must be of the numeric type"})
+          return res.json(error)
+    }
+    const cellFormated = await validateTelephoneCell(cell_phone)
+        
+        if (cell_phone && !cellFormated){
+            error.push ({error:"Invalid Cell-Phone"})
+            // return  res.status(404).json({error:"Invalid Cell-Phone"})
+        }
     
     let nature =''
     let cpf_cnpjFormatado = ''
     
     if(!await emailValidator.validate(email)){
-        return res.status(404).json({error:'Email inválido'})
+        error.push ( {error:'Invalid e-mail'})
+        // return res.status(404).json({error:'Invalid e-mail'})
+    }
+    if (error.length != 0){
+        return res.status(401).json(error)
     }
 
     if (cpfCnpjValidator.cnpj.isValid(cpf_cnpj)){
@@ -42,10 +59,11 @@ async function createClient(req,res){
         
         //FORMATAÇÃO DO TELEFONE 
         const telefoneResponse = response.data.telefone.trim().split("/")
-        const telefoneFormatado = await validateTelephoneCell(telefoneResponse[0])
+        const telefoneValido = await validateTelephoneCell(telefoneResponse[0])
         
-        if (!telefoneFormatado){
-            return  res.status(404).json({error:"Telefone Inválido"})
+        if (phone && !telefoneValido){
+            return res.json({error:"Invalid Phone"})
+            // return  res.status(404).json({error:"Invalid Phone"})
         }
         
         const clientCreated =  await Client.create({cpf_cnpj:cpf_cnpjFormatado,
@@ -55,7 +73,7 @@ async function createClient(req,res){
             address:response.data.logradouro??address,
             number:response.data.numero??number,
             zone:response.data.bairro??zone,
-            phone:telefoneFormatado??phone,
+            phone,
             cell_phone:cell_phone??cell_phone,
             email,
             site,
@@ -66,20 +84,27 @@ async function createClient(req,res){
         if (cpfCnpjValidator.cpf.isValid(cpf_cnpj)){
             nature = 'F'
             cpf_cnpjFormatado = cpfCnpjValidator.cpf.format(cpf_cnpj)
-            const telefoneFormatado = telefoneFormatado(telefone)
-            if (!telefoneFormatado){
-                return  res.status(404).json({error:"Phone Invalid"})
+            const telefoneValido = await validateTelephoneCell(phone)
+            if (phone && !telefoneValido){
+                return res.json({error:"Invalid Phone"})
+                // return  res.status(404).json({error:"Invalid Phone"})
             }
             const clientCreated =  await Client.create({cpf_cnpj:cpf_cnpjFormatado,
-                razao_social,nome_fantasia:null,
-                nature,endereco,numero,
-                bairro,telefone:telefoneFormatado,email,site,city_id
+                name,trade_name:null,
+                nature,address,number,
+                zone,phone,
+                cell_phone:cell_phone,
+                email,site,city_id
                 });
             return res.json(clientCreated)
         }
     }
     if (!nature){
-        return  res.status(404).json({error:"Invalid CPF/CNPJ "})
+        error.push ({error:"Invalid CPF/CNPJ "})
+        // return  res.status(404).json({error:"Invalid CPF/CNPJ "})
+    }
+    if (error !=0){
+        return res.status(401).json(error)
     }
 
 }
@@ -87,26 +112,20 @@ async function createClient(req,res){
   
     async function findAllClients(req,res){
         const {cpf_cnpj,name,phone,city_id} = req.query
-        
-        const clientsQuery = await Client.findAll({
-            where: { 
-                [Op.and]:[
-                {cpf_cnpj:{[Op.iLike]:"%"+cpf_cnpj}},
-                {name:{[Op.iLike]:"%"+name+"%"}},
-                {phone:{[Op.eq]:phone}},
-                {city_id:{[Op.eq]:city_id}}   
-                ]
-        }
-        })
-        if (clientsQuery.length===0){
-            let clients = await Client.findAll()
-            if (!clients){
-                return res.status(401).json({error:"Clients not found"})
+
+   
+     
+        const clientsFounded = await Client.findAll({where:{
+            [Op.and]:{
+            
+            name:{[Op.iLike]: `%${name}%`},
+            cpf_cnpj:{[Op.iLike]: `%${cpf_cnpj}%`},
+            cpf_cnpj:{[Op.iLike]: `%${phone}%`},
+            cpf_cnpj:{[Op.iLike]: `%${city_id}%`},
             }
-            return res.json(clients)
-        }
-        
-       return res.json(clientsQuery)
+        }})
+
+       return res.json(clientsFounded)
     }  
     async function findClient(req,res){
       
@@ -119,7 +138,8 @@ async function createClient(req,res){
         }
         const city = await City.findByPk(client.city_id)
         return res.json({client,city})
-     } 
+     }
+      
      async function updateClient(req,res){
         const {id} = req.params
         const client = await Client.findByPk(id)
