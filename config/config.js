@@ -88,6 +88,7 @@ module.exports = {
   database:'dbcen3s14hknqs',
   dialect: 'postgres',
   port : '5432',
+  ssl: true,
   define:  {
       timestamp: true,
       underscored:true,
