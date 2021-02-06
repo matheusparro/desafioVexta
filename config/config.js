@@ -89,12 +89,14 @@ module.exports = {
   // url:process.env.DATABASE_URL,
   dialect: 'postgres',
   port : '5432',
-  ssl: false,
   define:  {
       timestamp: true,
       underscored:true,
       freezeTableName: false,
   },
+  dialectOptions: {
+    ssl: true
+    }
 }
 
 
