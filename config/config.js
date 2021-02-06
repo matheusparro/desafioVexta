@@ -95,8 +95,11 @@ module.exports = {
       freezeTableName: false,
   },
   dialectOptions: {
-    ssl: true
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // <<<<<<< YOU NEED THIS
     }
+  }
 }
 
 
