@@ -48,10 +48,14 @@ module.exports = {
     "port":"5432",
     "host": "ec2-52-204-113-104.compute-1.amazonaws.com",
     "dialect": "postgres",
+    "protocol": "postgres",
+    "dialectOptions": {
+        "ssl": "true"
+    },
     "define":  {
-      "timestamp": true,
-      "underscored":true,
-      "freezeTableName": true
+      "timestamp": "true",
+      "underscored":"true",
+      "freezeTableName": "true"
     }
   },
   
@@ -62,10 +66,14 @@ module.exports = {
     "port":"5432",
     "host": "ec2-52-204-113-104.compute-1.amazonaws.com",
     "dialect": "postgres",
+    "protocol": "postgres",
+    "dialectOptions": {
+        "ssl": "true"
+    },
     "define":  {
-      "timestamp": true,
-      "underscored":true,
-      "freezeTableName": true
+      "timestamp": "true",
+      "underscored":"true",
+      "freezeTableName": "true"
     }
   },
   "production": {
@@ -75,10 +83,14 @@ module.exports = {
     "port":"5432",
     "host": "ec2-52-204-113-104.compute-1.amazonaws.com",
     "dialect": "postgres",
+    "protocol": "postgres",
+    "dialectOptions": {
+        "ssl": "true"
+    },
     "define":  {
-      "timestamp": true,
-      "underscored":true,
-      "freezeTableName": true
+      "timestamp": "true",
+      "underscored":"true",
+      "freezeTableName": "true"
     }
   }
 }
