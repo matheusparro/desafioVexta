@@ -68,6 +68,7 @@ module.exports = {
       "freezeTableName": true
     }
   },
+  "production": {
   "username": "krzxzgwobtijtw",
     "password": "9c62f76099eaf2e86c54a70f8f192ec0db6a66d73b9ef6ed2c51c7c111c603e2",
     "database": "dckl19bkq29ks8",
@@ -79,5 +80,6 @@ module.exports = {
       "underscored":true,
       "freezeTableName": true
     }
+  }
 }
 
