@@ -10,6 +10,7 @@ module.exports = {
     // password:'docker',
     // database:'desafioVexta',
     port : '5432',
+    protocol: null,
     define:  {
         timestamp: true,
         underscored:true,
