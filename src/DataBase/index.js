@@ -1,11 +1,11 @@
 // CONEXAO COM BANCO
-const Sequelize = require ('sequelize');
+const sequelize = require ('sequelize');
 const dbConfig = require ('../Config/dataBase')
 
 const User = require('../models/User');
 const City = require('../models/City');
 const Client = require ('../models/Client')
-const connection = new Sequelize(dbConfig);
+const connection = new sequelize(dbConfig);
 
 User.init(connection)
 City.init(connection)

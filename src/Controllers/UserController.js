@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const Op = require("sequelize/lib/operators")
+const {Op} = require("sequelize")
 async function createUser(req,res){
     const {login} = req.body
     const userFind = await User.findOne({
