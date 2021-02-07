@@ -1,17 +1,16 @@
-// module.exports = {
-//   "development": {
-//     "username": "postgres",
-//     "password": "docker",
-//     "database": "desafioVexta",
-//     "port":"5432",
-//     "host": "localhost",
-//     "dialect": "postgres",
-//     "define":  {
-//       "timestamp": true,
-//       "underscored":true,
-//       "freezeTableName": true
-//     }
-//   },
+module.exports = {
+  "username": "postgres",
+  "password": "docker",
+  "database": "desafioVexta",
+  "port":"5432",
+  "host": "localhost",
+  "dialect": "postgres",
+  "define":  {
+    "timestamp": true,
+    "underscored":true,
+    "freezeTableName": false
+  }
+}
   
 //   "test": {
 //     "username": "postgres",
@@ -81,6 +80,7 @@
 //   },
 // }
 
+//CCONFIG HEROKU
 module.exports = {
   host: 'ec2-52-205-3-3.compute-1.amazonaws.com',
   username:'hfailttvrveoxr',

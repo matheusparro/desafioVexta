@@ -19,7 +19,7 @@ async function findAllUsers(req,res){
     
     const usersQuery = await User.findAll({
         where: { name:{
-            [Op.iLike]:`${name}`
+            [Op.iLike]:`%${name}%`
         }}
     })
    

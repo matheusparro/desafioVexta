@@ -1,7 +1,7 @@
 const Client = require("../models/Client");
 const cpfCnpjValidator = require("cpf-cnpj-validator")
 const axios = require("axios")
-const parse = require("telefone/parse")
+const {parse,format} = require("telefone")
 const {Op} = require("sequelize")
 const  emailValidator  = require ( "email-validator" ) 
 const City = require("../models/City"); 
@@ -14,6 +14,7 @@ async function validateTelephoneCell(numero){
     if (!formatedPhone){
         return null
     }
+
     return formatedPhone
 }
 
@@ -28,6 +29,9 @@ async function createClient(req,res){
     if (!city){
         // res.status(404).json({error:"City not found"})
         error.push ({error:"City not found"})
+    }
+    if(site && !validUrl.isUri(site)){
+        error.push({error:"Site is not a valid url"})
     }
     if(number && isNaN(number)){
         // res.status(404).json({error:"Number address must be of the numeric type"})
