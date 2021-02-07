@@ -38,7 +38,7 @@ async function createCity(req,res){
         const {id} = req.params
         const city = await City.findByPk(id)
         if (!city){
-            return res.status(404).json({error:"City does not exist"})
+            return res.status(404).json({error:"City not found"})
         }
         await city.update(req.body)
         
@@ -49,7 +49,7 @@ async function createCity(req,res){
         const {id} = req.params
         const city = await City.findByPk(id)
         if (!city){
-            return res.status(404).json({error:"City does not exist"})
+            return res.status(404).json({error:"City not found"})
         }
         try {
             await city.destroy()

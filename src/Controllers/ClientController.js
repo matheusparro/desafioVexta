@@ -10,6 +10,7 @@ const validUrl = require('valid-url');
 
 /************VALIDAR EMAIL https://stackoverflow.com/questions/30931079/validating-a-url-in-node-js/55585593 *******/
 async function validateTelephoneCell(numero){
+ 
     let formatedPhone = parse(numero)
     if (!formatedPhone){
         return null
@@ -63,22 +64,18 @@ async function createClient(req,res){
         
         //FORMATAÇÃO DO TELEFONE 
         const telefoneResponse = response.data.telefone.trim().split("/")
-        const telefoneValido = await validateTelephoneCell(telefoneResponse[0])
-        
-        if (phone && !telefoneValido){
-            return res.json({error:"Invalid Phone"})
-            // return  res.status(404).json({error:"Invalid Phone"})
-        }
+     
+       
         
         const clientCreated =  await Client.create({cpf_cnpj:cpf_cnpjFormatado,
-            name,
+            name:response.data.nome??name,
             trade_name:response.data.fantasia??trade_name,
             nature,
             address:response.data.logradouro??address,
             number:response.data.numero??number,
             zone:response.data.bairro??zone,
-            phone,
-            cell_phone:cell_phone??cell_phone,
+            phone:telefoneResponse[0]??phone,
+            cell_phone:cellFormated??cell_phone,
             email,
             site,
             city_id,
@@ -116,20 +113,36 @@ async function createClient(req,res){
   
     async function findAllClients(req,res){
         const {cpf_cnpj,name,phone,city_id} = req.query
-
-   
-     
+       
+        let id_city = city_id
+        if (city_id == ''){
+            id_city = 0
+        }
+       
         const clientsFounded = await Client.findAll({where:{
             [Op.and]:{
             
             name:{[Op.iLike]: `%${name}%`},
             cpf_cnpj:{[Op.iLike]: `%${cpf_cnpj}%`},
             phone:{[Op.iLike]: `%${phone}%`},
-            city_id:{[Op.in]: [city_id]},
+            city_id:{[Op.eq]: id_city},
+            }
+        }})
+        if (clientsFounded.length != 0){
+            return res.json(clientsFounded)
+        }
+
+        const clientsFounded2 = await Client.findAll({where:{
+            [Op.and]:{
+            
+            name:{[Op.iLike]: `%${name}%`},
+            cpf_cnpj:{[Op.iLike]: `%${cpf_cnpj}%`},
+            phone:{[Op.iLike]: `%${phone}%`},
+            city_id:{[Op.ne]:0},
             }
         }})
 
-       return res.json(clientsFounded)
+       return res.json(clientsFounded2)
     }  
     async function findClient(req,res){
       
