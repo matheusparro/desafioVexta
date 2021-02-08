@@ -1,10 +1,10 @@
 
 
-# desafioVexta
+# desafioVexta <img src="https://img.icons8.com/color/452/nodejs.png" width="48">
 
 Projeto de qualificação para vaga de Desenvolvendor Back-End em Node-JS
 
-  * <img src="https://img.icons8.com/color/452/nodejs.png" width="48"> JavaScript (NodeJS)
+  * JavaScript (NodeJS)
   * Sequelize
   * PostGres
   
