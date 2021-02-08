@@ -1,8 +1,8 @@
 # desafioVexta
 
 <div>
-    <img class="img" src="http://img.bomnegocio.com/images/14/1430448213.jpg" style="width: 400px; height: 300px; margin: 5px; float:left; " />
-    <p style="word-wrap: break-word; ">testel &nbsp;</p>
+    <img class="img" src="https://img.icons8.com/color/452/nodejs.png" style="width: 400px; height: 300px; margin: 5px; float:left; " />
+    <p style="word-wrap: break-word; ">NODE JS &nbsp;</p>
 </div>
 
 
