@@ -1,11 +1,5 @@
 # desafioVexta
 
-<p> <img src="https://img.icons8.com/color/452/nodejs.png" width="150" height="150" align="left">
-Node-JS
-</p>
-
-
-
 Projeto de qualificação para vaga de Desenvolvendor Back-End em Node-JS
 
   * JavaScript (NodeJS)
@@ -20,4 +14,3 @@ Requisitos resumidos
   
 Rode o comando "yarn" para instalar todas as dependecias do projeto.
 
-<img src="https://img.icons8.com/color/452/nodejs.png" width="48">   <img src="https://cdn.iconscout.com/icon/free/png-256/sequelize-3-1175091.png" width="55">  <img src="https://d1.awsstatic.com/rdsImages/postgresql_logo.6de4615badd99412268bc6aa8fc958a0f403dd41.png" width="48">
