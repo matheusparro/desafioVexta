@@ -1,3 +1,4 @@
+![alt text](https://img.icons8.com/color/452/nodejs.png)
 # desafioVexta
 
 Projeto de qualificação para vaga de Desenvolvendor Back-End em Node-JS
