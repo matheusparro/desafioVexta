@@ -1,5 +1,5 @@
 # desafioVexta
-<img src="https://img.icons8.com/color/452/nodejs.png" width="48">  <img src="https://cdn.iconscout.com/icon/free/png-256/sequelize-3-1175091.png" width="55"> <img src="https://img2.gratispng.com/20180806/zfw/kisspng-postgresql-clip-art-database-logo-web-design-strategy-relik-5b67d8468fcf82.2394477615335322305891.jpg" width="48">
+<img src="https://img.icons8.com/color/452/nodejs.png" width="48">  <img src="https://cdn.iconscout.com/icon/free/png-256/sequelize-3-1175091.png" width="55"> <img src="https://img1.gratispng.com/20180804/aaz/kisspng-postgresql-object-relational-database-oracle-datab-portfolio-whitebolt-whitebolt-5b65f8213f29d6.5042016815334093132587.jpg" width="48">
 
 Projeto de qualificação para vaga de Desenvolvendor Back-End em Node-JS
 
