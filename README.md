@@ -1,6 +1,6 @@
 
-<div style="text-align:center"><img src="https://img.icons8.com/color/452/nodejs.png" width="48"></div>
-# desafioVexta 
+<div style="text-align:center"><img src="https://img.icons8.com/color/452/nodejs.png" width="48"># desafioVexta </div>
+
 
 Projeto de qualificação para vaga de Desenvolvendor Back-End em Node-JS
 
