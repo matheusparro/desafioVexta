@@ -1,11 +1,10 @@
 # desafioVexta
 
 Projeto de qualificação para vaga de Desenvolvendor Back-End em Node-JS
-<div>
-  <a>* JavaScript (NodeJS)</>
-  <a>* Sequelize</>
-  <a>* PostGres</>
- </div>
+
+  * JavaScript (NodeJS)
+  * Sequelize
+  * PostGres
   
 Requisitos resumidos
 
