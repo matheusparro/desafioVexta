@@ -2,9 +2,9 @@
 
 Projeto de qualificação para vaga de Desenvolvendor Back-End em Node-JS
 <div>
-  * JavaScript (NodeJS)
-  * Sequelize
-  * PostGres
+  <a>* JavaScript (NodeJS)</>
+  <a>* Sequelize</>
+  <a>* PostGres</>
  </div>
   
 Requisitos resumidos
