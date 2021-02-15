@@ -1,44 +1,41 @@
-'use strict';
-
+/* eslint-disable no-unused-vars */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('users', {
       id: {
         type: Sequelize.INTEGER,
-        primarayKey:true,
-        autoIncrement:true,
+        primarayKey: true,
+        autoIncrement: true,
         allownull: false,
-        unique:true,
+        unique: true,
       },
-      login:{
+      login: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique:true,
+        unique: true,
       },
-      name:{
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      password_hash:{
+      password_hash: {
         type: Sequelize.STRING,
-        allowNull:false,
+        allowNull: false,
       },
-      is_admin:{
+      is_admin: {
         type: Sequelize.BOOLEAN,
-        allowNull:true,
+        allowNull: true,
       },
-      created_at:{
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      updated_at:{
+      updated_at: {
         type: Sequelize.DATE,
-        allowNull:false,
-      }
-   });
+        allowNull: false,
+      },
+    });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('users');
-  }
+  down: async (queryInterface, Sequelize) => queryInterface.dropTable('users'),
 };

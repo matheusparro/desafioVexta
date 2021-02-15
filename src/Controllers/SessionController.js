@@ -1,31 +1,30 @@
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+const authConfig = require('../Config/authConfig');
 
-const User = require("../models/User");
-const jwt = require('jsonwebtoken')
-const authConfig = require('../Config/authConfig')
-async function authenticateUser(req,res){
-  const {login,password} = req.body
- 
-  
-  const userFind = await User.findOne({where:{login}})
-  if (!userFind){
-    res.status(401).json("User not found")
+async function authenticateUser(req, res) {
+  const { login, password } = req.body;
+
+  const userFind = await User.findOne({ where: { login } });
+  if (!userFind) {
+    res.status(401).json('User not found');
   }
-  if (!(await userFind.checkPassword(password))){
-    return res.status(401).json({error:'Password does not match '})
+
+  if (!(await userFind.checkPassword(password))) {
+    return res.status(401).json({ error: 'Password does not match ' });
   }
-  
-  const {id,name} = userFind
+
+  const { id, name } = userFind;
   return res.json({
-    user:{
+    user: {
       login,
-      name
+      name,
     },
-    token: jwt.sign({id},authConfig.secret,{
-      expiresIn:authConfig.expiresIn
-    })
-  })
-
+    token: jwt.sign({ id }, authConfig.secret, {
+      expiresIn: authConfig.expiresIn,
+    }),
+  });
 }
 module.exports = {
-  authenticateUser
-}
+  authenticateUser,
+};
