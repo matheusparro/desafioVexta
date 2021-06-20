@@ -4,7 +4,7 @@ const City = require('../models/City');
 async function createCity(req, res) {
   const { name, uf } = req.body;
   const cityCreated = await City.create({ name, uf });
-  return res.json(cityCreated);
+  return res.status(201).json(cityCreated);
 }
 
 async function findAllCities(req, res) {
@@ -19,7 +19,7 @@ async function findAllCities(req, res) {
     },
   });
 
-  return res.json(citiesQuery);
+  return res.status(201).json(citiesQuery);
 }
 
 async function findCity(req, res) {
@@ -31,7 +31,7 @@ async function findCity(req, res) {
     return res.status(404).json({ error: 'City not found' });
   }
 
-  return res.json(city);
+  return res.status(201).json(city);
 }
 
 async function updateCity(req, res) {
@@ -42,7 +42,7 @@ async function updateCity(req, res) {
   }
   await city.update(req.body);
 
-  return res.json(city);
+  return res.status(201).json(city);
 }
 
 async function deleteCity(req, res) {
@@ -57,7 +57,7 @@ async function deleteCity(req, res) {
     return res.status(412).json({ error: 'City is used by a client' });
   }
 
-  return res.json(city);
+  return res.status(201).json(city);
 }
 
 module.exports = {

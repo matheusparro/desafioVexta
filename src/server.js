@@ -10,3 +10,5 @@ const port = process.env.PORT || '3333';
 app.use(routes);
 
 app.listen(port);
+
+module.exports = app

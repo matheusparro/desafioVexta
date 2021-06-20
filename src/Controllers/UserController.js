@@ -10,7 +10,7 @@ async function createUser(req, res) {
     return res.status(401).json({ error: 'Login already used' });
   }
   const userCreated = await User.create(req.body);
-  return res.json(userCreated);
+  return res.status(201).json(userCreated);
 }
 
 async function findAllUsers(req, res) {
@@ -24,7 +24,7 @@ async function findAllUsers(req, res) {
     },
   });
 
-  return res.json(usersQuery);
+  return res.status(201).json(usersQuery);
 }
 
 async function findUser(req, res) {
@@ -33,7 +33,7 @@ async function findUser(req, res) {
   if (!user) {
     return res.status(401).json({ error: 'User not found' });
   }
-  return res.json(user);
+  return res.status(201).json(user);
 }
 
 async function updateUser(req, res) {
@@ -48,7 +48,7 @@ async function updateUser(req, res) {
   }
   await user.update(req.body);
 
-  return res.json(user);
+  return res.status(201).json(user);
 }
 async function deleteUser(req, res) {
   const { id } = req.params;
@@ -58,7 +58,7 @@ async function deleteUser(req, res) {
   }
   await user.destroy();
 
-  return res.json(user);
+  return res.status(201).json(user);
 }
 
 module.exports = {

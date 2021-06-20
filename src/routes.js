@@ -8,13 +8,16 @@ const admin = require('./middlewares/validateAdmin');
 
 const routes = express.Router();
 
+routes.get('/', (req,res)=>{
+  res.send({message:"Server ON"})
+});
 routes.post('/users', UserController.createUser);
-
+routes.get('/users', UserController.findAllUsers);
 routes.post('/sessions', SessionController.authenticateUser);
 routes.use(auth.validateToken);
 routes.use(admin.validateAdmin);
 
-routes.get('/users', UserController.findAllUsers);
+
 routes.get('/users/:id', UserController.findUser);
 routes.patch('/users/:id', UserController.updateUser);
 routes.delete('/users/:id', UserController.deleteUser);
@@ -30,5 +33,8 @@ routes.get('/clients/:id', ClientController.findClient);
 routes.post('/clients', ClientController.createClient);
 routes.patch('/clients/:id', ClientController.updateClient);
 routes.delete('/clients/:id', ClientController.deleteClient);
+
+
+
 
 module.exports = routes;

@@ -18,6 +18,7 @@ async function validateTelephoneCell(numero) {
   return formatedPhone;
 }
 
+
 // eslint-disable-next-line consistent-return
 async function createClient(req, res) {
   const error = [];
@@ -78,7 +79,7 @@ async function createClient(req, res) {
       site,
       city_id,
     });
-    return res.json(clientCreated);
+    return res.status(201).json(clientCreated);
   }
   if (cpfCnpjValidator.cpf.isValid(cpf_cnpj)) {
     nature = 'F';
@@ -102,7 +103,7 @@ async function createClient(req, res) {
       site,
       city_id,
     });
-    return res.json(clientCreated);
+    return res.status(201).json(clientCreated);
   }
 
   if (!nature) {
@@ -135,7 +136,7 @@ async function findAllClients(req, res) {
     },
   });
   if (clientsFounded.length !== 0) {
-    return res.json(clientsFounded);
+    return res.status(201).json(clientsFounded);
   }
 
   const clientsFounded2 = await Client.findAll({
@@ -149,7 +150,7 @@ async function findAllClients(req, res) {
     },
   });
 
-  return res.json(clientsFounded2);
+  return res.status(201).json(clientsFounded2);
 }
 async function findClient(req, res) {
   const { id } = req.params;
@@ -160,7 +161,7 @@ async function findClient(req, res) {
     return res.status(404).json({ error: 'Client not found' });
   }
   const city = await City.findByPk(client.city_id);
-  return res.json({ client, city });
+  return res.status(201).json({ client, city });
 }
 
 async function updateClient(req, res) {
@@ -171,17 +172,17 @@ async function updateClient(req, res) {
   }
   await client.update(req.body);
 
-  return res.json(client);
+  return res.status(201).json(client);
 }
 async function deleteClient(req, res) {
   const { id } = req.params;
   const client = await Client.findByPk(id);
   if (!client) {
-    return res.status(400).json({ error: 'Client does not exist' });
+    return res.status(404).json({ error: 'Client does not exist' });
   }
   await client.destroy();
 
-  return res.json(client);
+  return res.status(201).json(client);
 }
 
 module.exports = {
@@ -190,5 +191,6 @@ module.exports = {
   findClient,
   updateClient,
   deleteClient,
+  validateTelephoneCell
 
 };

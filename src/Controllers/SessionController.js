@@ -7,7 +7,7 @@ async function authenticateUser(req, res) {
 
   const userFind = await User.findOne({ where: { login } });
   if (!userFind) {
-    res.status(401).json('User not found');
+    return res.status(401).json('User not found');
   }
 
   if (!(await userFind.checkPassword(password))) {
@@ -15,7 +15,7 @@ async function authenticateUser(req, res) {
   }
 
   const { id, name } = userFind;
-  return res.json({
+  return res.status(201).json({
     user: {
       login,
       name,
