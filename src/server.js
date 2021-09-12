@@ -1,5 +1,5 @@
-const express = require('express');
-const routes = require('./routes');
+import express from 'express'
+import router from './routes';
 require('./DataBase/index');
 
 const app = express();
@@ -7,7 +7,7 @@ app.use(express.json());
 
 const port = process.env.PORT || '3333';
 
-app.use(routes);
+app.use(router);
 
 app.listen(port);
 

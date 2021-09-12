@@ -1,12 +1,14 @@
 /* eslint-disable camelcase */
-const cpfCnpjValidator = require('cpf-cnpj-validator');
-const axios = require('axios');
-const { parse } = require('telefone');
-const { Op } = require('sequelize');
-const emailValidator = require('email-validator');
-const validUrl = require('valid-url');
-const City = require('../models/City');
-const Client = require('../models/Client');
+import {cnpj,cpf, validator} from'cpf-cnpj-validator'
+import axios from'axios'
+import {parse}  from'telefone'
+import { Op } from'sequelize'
+import {validate}  from 'email-validator'
+import {isUri} from'valid-url'
+//const validUrl = require('valid-url')
+import City from'../models/City'
+import Client from'../models/Client'
+
 
 /** **********VALIDAR EMAIL https://stackoverflow.com/questions/30931079/validating-a-url-in-node-js/55585593 ****** */
 async function validateTelephoneCell(numero) {
@@ -33,14 +35,14 @@ async function createClient(req, res) {
     // res.status(404).json({error:"City not found"})
     error.push({ error: 'City not found' });
   }
-  if (site && !validUrl.isUri(site)) {
+  if (site && !isUri(site)) {
     error.push({ error: 'Site is not a valid url' });
   }
-  if (number && number.isNaN()) {
-    // res.status(404).json({error:"Number address must be of the numeric type"})
-    error.push({ error: 'Number address must be of the numeric type' });
-    return res.json(error);
-  }
+  // if (number ) {
+  //   // res.status(404).json({error:"Number address must be of the numeric type"})
+  //   error.push({ error: 'Number address must be of the numeric type' });
+  //   return res.json(error);
+  // }
   const cellFormated = await validateTelephoneCell(cell_phone);
 
   if (cell_phone && !cellFormated) {
@@ -50,17 +52,17 @@ async function createClient(req, res) {
   let nature = '';
   let cpf_cnpjFormatado = '';
 
-  if (!await emailValidator.validate(email)) {
+  if (await validate(email)===false) {
     error.push({ error: 'Invalid e-mail' });
   }
   if (error.length !== 0) {
     return res.status(401).json(error);
   }
 
-  if (cpfCnpjValidator.cnpj.isValid(cpf_cnpj)) {
+  if (cnpj.isValid(cpf_cnpj)) {
     nature = 'J';
     const response = await axios.get(`https://www.receitaws.com.br/v1/cnpj/${cpf_cnpj}`);
-    cpf_cnpjFormatado = cpfCnpjValidator.cnpj.format(cpf_cnpj);
+    cpf_cnpjFormatado = cnpj.format(cpf_cnpj);
 
     // FORMATAÇÃO DO TELEFONE
     const telefoneResponse = response.data.telefone.trim().split('/');
@@ -81,9 +83,9 @@ async function createClient(req, res) {
     });
     return res.status(201).json(clientCreated);
   }
-  if (cpfCnpjValidator.cpf.isValid(cpf_cnpj)) {
+  if (cpf.isValid(cpf_cnpj)) {
     nature = 'F';
-    cpf_cnpjFormatado = cpfCnpjValidator.cpf.format(cpf_cnpj);
+    cpf_cnpjFormatado = cpf.format(cpf_cnpj);
     const telefoneValido = await validateTelephoneCell(phone);
     if (phone && !telefoneValido) {
       return res.json({ error: 'Invalid Phone' });

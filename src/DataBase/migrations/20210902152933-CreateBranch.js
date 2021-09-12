@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('User', {
+    await queryInterface.createTable('Branch', {
       id: {
         type: Sequelize.INTEGER,
         primarayKey: true,
@@ -11,7 +11,7 @@ module.exports = {
       },
       company_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
           model: 'Company',
           key: 'id'
@@ -19,25 +19,11 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'cascade'
       },
-
-      login: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-
       name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      password_hash: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      is_admin: {
-        type: Sequelize.BOOLEAN,
-        allowNull: true,
-      },
+
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -49,5 +35,5 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => queryInterface.dropTable('User'),
+  down: async (queryInterface, Sequelize) => queryInterface.dropTable('Branch'),
 };

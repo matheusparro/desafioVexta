@@ -1,5 +1,5 @@
-const { Op } = require('sequelize');
-const City = require('../models/City');
+import { Op } from 'sequelize'
+import City from '../models/City'
 
 async function createCity(req, res) {
   const { name, uf } = req.body;
@@ -60,7 +60,7 @@ async function deleteCity(req, res) {
   return res.status(201).json(city);
 }
 
-module.exports = {
+export default{
   createCity,
   findAllCities,
   findCity,

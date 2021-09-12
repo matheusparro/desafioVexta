@@ -1,21 +1,25 @@
-const express = require('express');
-const UserController = require('./Controllers/UserController');
-const CityController = require('./Controllers/CityController');
-const ClientController = require('./Controllers/ClientController');
-const SessionController = require('./Controllers/SessionController');
-const auth = require('./middlewares/auth');
-const admin = require('./middlewares/validateAdmin');
-
+import express from 'express'
+import UserController from './Controllers/UserController'
+import CityController from './Controllers/CityController'
+import ClientController from './Controllers/ClientController'
+import SessionController from './Controllers/SessionController'
+import auth from './middlewares/auth'
+import admin from './middlewares/validateAdmin'
+//const UsersBranchesController = require('./Controllers/UsersBranchesController')
+import UsersBranchesController from './Controllers/UsersBranchesController'
 const routes = express.Router();
 
 routes.get('/', (req,res)=>{
   res.send({message:"Server ON"})
 });
+routes.post('/usersbranches', UsersBranchesController.createUsersBranches);
 routes.post('/users', UserController.createUser);
-routes.get('/users', UserController.findAllUsers);
+routes.post('/branches', UsersBranchesController.teste);
+
 routes.post('/sessions', SessionController.authenticateUser);
-routes.use(auth.validateToken);
-routes.use(admin.validateAdmin);
+//routes.use(auth.validateToken);
+//routes.use(admin.validateAdmin);
+routes.get('/users', UserController.findAllUsers);
 
 
 routes.get('/users/:id', UserController.findUser);
@@ -37,4 +41,4 @@ routes.delete('/clients/:id', ClientController.deleteClient);
 
 
 
-module.exports = routes;
+export default routes;

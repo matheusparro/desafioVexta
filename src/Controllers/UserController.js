@@ -1,5 +1,5 @@
-const { Op } = require('sequelize');
-const User = require('../models/User');
+import { Op } from 'sequelize'
+import  User from '../models/User'
 
 async function createUser(req, res) {
   const { login } = req.body;
@@ -61,7 +61,7 @@ async function deleteUser(req, res) {
   return res.status(201).json(user);
 }
 
-module.exports = {
+export default  {
   createUser,
   findAllUsers,
   findUser,

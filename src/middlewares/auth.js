@@ -1,9 +1,9 @@
-const { promisify } = require('util');
-const jwt = require('jsonwebtoken');
-const authConfig = require('../Config/authConfig');
+import { promisify }  from 'util'
+import jwt from 'jsonwebtoken'
+import authConfig from '../Config/authConfig'
 
-module.exports = {
-  async validateToken(req, res, next) {
+
+  async function validateToken(req, res, next) {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
@@ -17,5 +17,5 @@ module.exports = {
     } catch (err) {
       return res.status(401).json({ error: ' Token invalid' });
     }
-  },
-};
+  }
+  export default {validateToken}

@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+import {Model, DataTypes } from 'sequelize'
 
 class Client extends Model {
   static init(connection) {
@@ -24,4 +24,4 @@ class Client extends Model {
     this.belongsTo(models.City, { foreignKey: 'city_id', as: 'city' });
   }
 }
-module.exports = Client;
+export default Client;
